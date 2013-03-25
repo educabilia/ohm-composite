@@ -8,11 +8,17 @@ module Ohm::Composite
   end
 
   def self.method_name(attrs)
-    :"_composite_#{attrs.join("_")}"
+    :"_composite_#{join(attrs, "_")}"
   end
 
   def self.values(values)
-    values.map { |v| v.to_s.gsub(":", '\:') }.join(":")
+    join(values, ":")
+  end
+
+  def self.join(elements, char)
+    replacement = char * 2
+
+    elements.map { |e| e.to_s.gsub(char, replacement) }.join(char)
   end
 
   module Macros

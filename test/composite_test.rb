@@ -1,8 +1,4 @@
-ENV["REDIS_URL"] = "redis://localhost:6379/15"
-
-require "cutest"
-
-require_relative "../lib/ohm/composite"
+require_relative "prelude"
 
 class Post < Ohm::Model
   include Ohm::Composite
@@ -26,10 +22,6 @@ scope do
   def assert_empty(value)
     flunk("#{value} is not empty.") unless value.empty?
     success
-  end
-
-  setup do
-    Ohm.flush
   end
 
   test "find" do
