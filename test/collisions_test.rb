@@ -3,27 +3,26 @@ require_relative "prelude"
 class Post < Ohm::Model
   include Ohm::Composite
 
-  attribute :foo
-  attribute :bar
-  attribute :baz
+  attribute :a
+  attribute :c
 
-  attribute :bar_baz
-  attribute :baz_foo
+  attribute :a_b
+  attribute :b_c
 
-  composite_unique [:foo, :bar_baz]
-  composite_unique [:bar, :baz_foo]
+  composite_unique [:a, :b_c]
+  composite_unique [:a_b, :c]
 end
 
 scope do
   test "does not confuse names" do
-    post1 = Post.create(foo: "foo", bar_baz: "bar_baz")
+    post1 = Post.create(a: "a", b_c: "b_c")
 
-    assert_equal post1, Post.composite_with(foo: "foo", bar_baz: "bar_baz")
-    assert_equal nil, Post.composite_with(bar: "bar_baz", baz_foo: "foo")
+    assert_equal post1, Post.composite_with(a: "a", b_c: "b_c")
+    assert_equal nil, Post.composite_with(a_b: "a_b", c: "c")
 
-    post2 = Post.create(bar: "bar_baz", baz_foo: "foo")
+    post2 = Post.create(a_b: "a_b", c: "c")
 
-    assert_equal post1, Post.composite_with(foo: "foo", bar_baz: "bar_baz")
-    assert_equal post2, Post.composite_with(bar: "bar_baz", baz_foo: "foo")
+    assert_equal post1, Post.composite_with(a: "a", b_c: "b_c")
+    assert_equal post2, Post.composite_with(a_b: "a_b", c: "c")
   end
 end
