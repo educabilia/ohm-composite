@@ -27,7 +27,7 @@ Post.composite_with(user_id: 1, slug: "lorem-ipsum")
 "Find or create"
 ----------------
 
-Often times you need to find an instance by their uniqueness, or create
+Often times you need to find an instance by its uniqueness, or create
 it if it's not found.
 
 For this purpose there's `composite_with_or_create`:
